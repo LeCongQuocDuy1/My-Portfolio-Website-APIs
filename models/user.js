@@ -1,4 +1,5 @@
 const mongoose = require("mongoose"); // Erase if already required
+const bcrypt = require("bcrypt");
 
 // Object.freeze - đảm bảo các giá trị không thay đổi
 const RoleEnum = Object.freeze({
@@ -35,6 +36,15 @@ const userSchema = new mongoose.Schema({
         enum: Object.values(RoleEnum),
         default: RoleEnum.USER,
     },
+});
+
+userSchema.pre("save", function (next) {
+    // Khi password cũ ko có thay đổi gì thì không cần phải hash lại làm gì
+    if (this.isModified("password")) {
+        const salt = bcrypt.genSaltSync(10);
+        this.password = bcrypt.hashSync(this.password, salt);
+    }
+    next();
 });
 
 //Export the model
