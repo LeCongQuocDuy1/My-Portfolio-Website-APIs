@@ -1,8 +1,8 @@
 const express = require("express");
 require("dotenv").config();
-// const dbConnect = require("./config/dbConnect");
+const dbConnect = require("./config/dgConnect");
 const cookieParser = require("cookie-parser");
-// const initRoutes = require("./routes/");
+const initRoutes = require("./routes/");
 const cors = require("cors");
 
 const app = express();
@@ -19,8 +19,8 @@ app.use(express.json()); // đọc hiểu dữ liệu json
 app.use(express.urlencoded({ extended: true })); // đọc và sử dụng dữ liệu x-www-form-urlencoded
 app.use(cookieParser()); // đọc và sử dụng thông tin trong cookie
 
-// dbConnect();
-// initRoutes(app);
+dbConnect();
+initRoutes(app);
 
 app.use("/", (req, res) => {
     res.send("SERVER ON");
