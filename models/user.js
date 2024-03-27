@@ -22,6 +22,10 @@ const userSchema = new mongoose.Schema({
         type: Date,
         required: true,
     },
+    phone: {
+        type: String,
+        required: true,
+    },
     avatar: {
         type: String,
         default:
@@ -34,7 +38,7 @@ const userSchema = new mongoose.Schema({
     role: {
         type: String,
         enum: Object.values(RoleEnum),
-        default: RoleEnum.ADMIN,
+        default: RoleEnum.USER,
     },
 });
 
