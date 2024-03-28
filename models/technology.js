@@ -1,7 +1,7 @@
 const mongoose = require("mongoose"); // Erase if already required
 
 // Declare the Schema of the Mongo model
-var projectSchema = new mongoose.Schema(
+var technologySchema = new mongoose.Schema(
     {
         title: {
             type: String,
@@ -18,14 +18,10 @@ var projectSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        technology: {
-            type: mongoose.Types.ObjectId,
-            ref: "Technology",
-        },
         thumbnail: {
             type: String,
             default:
-                "https://scotturb.com/wp-content/uploads/2016/11/product-placeholder.jpg",
+                "https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?v=1530129081",
         },
     },
     {
@@ -34,4 +30,4 @@ var projectSchema = new mongoose.Schema(
 );
 
 //Export the model
-module.exports = mongoose.model("Project", projectSchema);
+module.exports = mongoose.model("Technology", technologySchema);

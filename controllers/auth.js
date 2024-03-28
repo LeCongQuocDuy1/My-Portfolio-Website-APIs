@@ -4,11 +4,12 @@ const asyncHandler = require("express-async-handler");
 const register = asyncHandler(async (req, res, next) => {
     const { username, email, phone, password, birthDate } = req.body;
 
-    if (!username || !email || !phone || !password || !birthDate)
+    if (!username || !email || !phone || !password || !birthDate) {
         return res.status(400).json({
             status: false,
             message: "Missing inputs, please enter all information!",
         });
+    }
 
     const user = await User.findOne({ email });
     if (user) {
@@ -39,12 +40,12 @@ const login = asyncHandler(async (req, res, next) => {
         return res.status(user ? 200 : 400).json({
             status: !!user,
             message: user
-                ? "Register user account successfully!"
-                : "Register user account failed!",
+                ? "Login successfully! Welcome to MY-CV"
+                : "Login failed!",
             response: user ? userData : undefined,
         });
     } else {
-        throw new Error(`Invalid login credentials! Try again`);
+        throw new Error(`Email or password incorrect! Try again`);
     }
 });
 

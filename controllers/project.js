@@ -22,7 +22,10 @@ const createProject = asyncHandler(async (req, res, next) => {
 });
 
 const getProjects = asyncHandler(async (req, res, next) => {
-    const response = await Project.find();
+    const response = await Project.find().populate({
+        path: "technology",
+        select: "title",
+    });
     if (!response) throw new Error("Project not found!");
 
     return res.status(response ? 200 : 400).json({
